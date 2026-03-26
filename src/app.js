@@ -23,7 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 // Lectura de cookies
 app.use(cookieParser());
 
-
+// Middleware de logging
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+});
 
 // Rutas Públicas (Cualquiera puede intentar hacer login)
 app.use('/api/auth', authRoutes);
